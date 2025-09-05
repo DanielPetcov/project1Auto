@@ -1,13 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
 @import "tailwindcss";
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Manrope", sans-serif;
-}
-
 @theme {
+  --font-manrope: "Manrope", sans-serif;
   --font-inter: "Inter", sans-serif;
 
   --color-black-100: #2b2c35;
@@ -20,6 +15,12 @@
 
   --background-image-pattern: url("/pattern.png");
   --background-image-hero-bg: url("/hero-bg.png");
+}
+
+@layer base {
+  html {
+    font-family: var(--font-manrope);
+  }
 }
 
 /* START: General styles */
@@ -83,7 +84,7 @@
   }
 
   .home__filters {
-    @apply mt-12 w-full flex-between items-center flex-wrap gap-5;
+    @apply mt-12 w-full flex justify-between items-center flex-wrap gap-5;
   }
 
   .home__filter-container {
@@ -165,7 +166,7 @@
   }
 
   .custom-filter__options {
-    @apply absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;
+    @apply absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-black/5 focus:outline-none sm:text-sm;
   }
   /* END: Custom Filter styles */
 
@@ -223,7 +224,7 @@
   }
 
   .search-manufacturer__options {
-    @apply absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;
+    @apply absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-black/5 focus:outline-none sm:text-sm;
   }
 
   .search-manufacturer__option {
