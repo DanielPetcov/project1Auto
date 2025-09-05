@@ -7,6 +7,21 @@
   font-family: "Manrope", sans-serif;
 }
 
+@theme {
+  --font-inter: "Inter", sans-serif;
+
+  --color-black-100: #2b2c35;
+  --color-primary-blue: #2b59ff;
+  --color-primary-blue-100: #f5f8ff;
+  --color-secondary-orange: #f79761;
+  --color-light-white: rgba(59, 60, 152, 0.03);
+  --color-light-white-100: rgba(59, 60, 152, 0.02);
+  --color-grey: #747a88;
+
+  --background-image-pattern: url("/pattern.png");
+  --background-image-hero-bg: url("/hero-bg.png");
+}
+
 /* START: General styles */
 
 @layer components {
