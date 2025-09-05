@@ -1,3 +1,3 @@
 export default function Hero() {
-  return <div>hero</div>;
+  return <div className="max-width">hero</div>;
 }
