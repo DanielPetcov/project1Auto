@@ -31,7 +31,10 @@ export default function CarCard({ car }: CardCarProps) {
         <span className="self-end text-[14px] font-medium">/day</span>
       </p>
 
-      <div className="relative w-full h-40 my-3 object-contain">
+      <button
+        onClick={() => setIsOpen(true)}
+        className="relative w-full h-40 my-3 object-contain"
+      >
         <Image
           src={car.images[0]}
           alt="car model"
@@ -39,7 +42,7 @@ export default function CarCard({ car }: CardCarProps) {
           priority
           className="object-contain"
         />
-      </div>
+      </button>
 
       <div className="relative flex w-full mt-2">
         <div className="flex group-hover:invisible w-full justify-between text-gray">

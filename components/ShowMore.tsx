@@ -6,9 +6,6 @@ import { updateSearchParams } from "@/utils";
 
 export default function ShowMore({ pageNumber, isNext }: ShowMoreProps) {
   const router = useRouter();
-
-  console.log(pageNumber, typeof pageNumber);
-
   const handleNavigation = () => {
     const newLimit = (pageNumber + 1) * 10;
     const newPathName = updateSearchParams("limit", String(newLimit));
