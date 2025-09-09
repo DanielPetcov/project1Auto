@@ -11,15 +11,9 @@ interface CardCarProps {
 }
 
 export default function CarCard({ car }: CardCarProps) {
-  const { year, make, model, transmission, drive } = car;
+  const { year, make, model, transmission, drive, city_mpg } = car;
 
   const [isOpen, setIsOpen] = useState(false);
-
-  const { city_mpg, highway_mpg, combination_mpg } = {
-    city_mpg: 12,
-    highway_mpg: 15,
-    combination_mpg: 13,
-  };
 
   const carRent = calculateCarRent(city_mpg, year);
 
@@ -39,7 +33,7 @@ export default function CarCard({ car }: CardCarProps) {
 
       <div className="relative w-full h-40 my-3 object-contain">
         <Image
-          src="/hero.png"
+          src={car.images[0]}
           alt="car model"
           fill
           priority
@@ -56,9 +50,7 @@ export default function CarCard({ car }: CardCarProps) {
               height={20}
               alt="steering wheel"
             />
-            <p className="text-[14px]">
-              {transmission === "a" ? "Automatic" : "Manual"}
-            </p>
+            <p className="text-[14px]">{transmission}</p>
           </div>
           <div className="flex flex-col justify-center items-center gap-2">
             <Image src={"/tire.svg"} width={20} height={20} alt="tire" />

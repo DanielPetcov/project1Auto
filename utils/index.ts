@@ -1,22 +1,47 @@
-export async function fetchCars() {
-  const RAPID_KEY = process.env.X_RAPIDAPI_KEY;
-  const RAPID_HOST = process.env.X_RAPIDAPI_HOST;
+import { CarProps, FetchCarsProps, FetchCarsReturnType } from "@/types";
 
-  if (!RAPID_KEY || !RAPID_HOST) return null;
+export async function fetchCars({
+  manufacturer,
+  model,
+  year,
+  limit,
+}: FetchCarsProps): Promise<FetchCarsReturnType> {
+  const env_url = process.env.BACKEND_URL;
 
-  const headers = {
-    "x-rapidapi-key": RAPID_KEY,
-    "x-rapidapi-host": RAPID_HOST,
+  if (!env_url) {
+    console.log("backend url is missing");
+    return {
+      data: [],
+      message: "error fetching cars",
+    };
+  }
+
+  const url = new URL(env_url);
+  url.searchParams.append(
+    "limit",
+    limit && !Array.isArray(limit) ? limit : "20"
+  );
+
+  if (manufacturer) {
+    if (!Array.isArray(manufacturer))
+      url.searchParams.append("make", manufacturer);
+  }
+
+  if (model) {
+    if (!Array.isArray(model)) url.searchParams.append("model", model);
+  }
+
+  if (year) {
+    if (!Array.isArray(year)) url.searchParams.append("year", year);
+  }
+
+  const response = await fetch(url);
+
+  const result: CarProps[] = await response.json();
+
+  return {
+    data: result,
   };
-
-  const url = `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=carrera`;
-
-  const response = await fetch(url, {
-    headers: headers,
-  });
-
-  const result = await response.json();
-  return result;
 }
 
 export const calculateCarRent = (city_mpg: number, year: number) => {

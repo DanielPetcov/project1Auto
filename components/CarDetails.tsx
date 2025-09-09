@@ -72,7 +72,7 @@ export default function CarDetails({
                   <div className="flex-1 flex flex-col gap-3">
                     <div className="relative w-full h-40 bg-pattern bg-cover bg-center rounded-lg">
                       <Image
-                        src="/hero.png"
+                        src={car.images[0]}
                         alt="car model"
                         fill
                         priority
@@ -83,7 +83,7 @@ export default function CarDetails({
                     <div className="flex gap-3`">
                       <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
                         <Image
-                          src="/hero.png"
+                          src={car.images[1]}
                           alt="car model"
                           fill
                           priority
@@ -92,7 +92,7 @@ export default function CarDetails({
                       </div>
                       <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
                         <Image
-                          src="/hero.png"
+                          src={car.images[2]}
                           alt="car model"
                           fill
                           priority
@@ -101,7 +101,7 @@ export default function CarDetails({
                       </div>
                       <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
                         <Image
-                          src="/hero.png"
+                          src={car.images[3]}
                           alt="car model"
                           fill
                           priority
@@ -116,25 +116,28 @@ export default function CarDetails({
                       {car.make} {car.model}
                     </h2>
                     <div className="mt-3 flex flex-wrap gap-4">
-                      {Object.entries(car).map(([key, value]) => (
-                        <div
-                          className="flex justify-between gap-5 w-full text-right"
-                          key={key}
-                        >
-                          <h4 className="text-gray-400 capitalize">
-                            {key.split("_").join(" ")}
-                          </h4>
-                          <p className="text-black-100 font-semibold">
-                            {key === "city_mpg"
-                              ? 12
-                              : key === "combination_mpg"
-                              ? 13
-                              : key === "highway_mpg"
-                              ? 15
-                              : value}
-                          </p>
-                        </div>
-                      ))}
+                      {Object.entries(car).map(([key, value]) => {
+                        if (key === "images" || key === "_id") return null;
+                        return (
+                          <div
+                            className="flex justify-between gap-5 w-full text-right"
+                            key={key}
+                          >
+                            <h4 className="text-gray-400 capitalize">
+                              {key.split("_").join(" ")}
+                            </h4>
+                            <p className="text-black-100 font-semibold">
+                              {key === "city_mpg"
+                                ? 12
+                                : key === "combination_mpg"
+                                ? 13
+                                : key === "highway_mpg"
+                                ? 15
+                                : value}
+                            </p>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 </DialogPanel>
