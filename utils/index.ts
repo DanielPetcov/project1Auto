@@ -5,6 +5,7 @@ export async function fetchCars({
   model,
   year,
   limit,
+  fuel_type,
 }: FetchCarsProps): Promise<FetchCarsReturnType> {
   const env_url = process.env.BACKEND_URL;
 
@@ -17,9 +18,10 @@ export async function fetchCars({
   }
 
   const url = new URL(env_url);
+
   url.searchParams.append(
     "limit",
-    limit && !Array.isArray(limit) ? limit : "20"
+    limit && !Array.isArray(limit) ? limit : "10"
   );
 
   if (manufacturer) {
@@ -35,9 +37,20 @@ export async function fetchCars({
     if (!Array.isArray(year)) url.searchParams.append("year", year);
   }
 
+  if (fuel_type) {
+    if (!Array.isArray(fuel_type)) url.searchParams.append("fuel", fuel_type);
+  }
+
   const response = await fetch(url);
 
   const result: CarProps[] = await response.json();
+
+  if (result.length === 0) {
+    return {
+      data: [],
+      message: "No cars where found",
+    };
+  }
 
   return {
     data: result,
@@ -55,4 +68,13 @@ export const calculateCarRent = (city_mpg: number, year: number) => {
   const rentalRatePerDay = basePricePerDay + mileageRate + ageRate;
 
   return rentalRatePerDay.toFixed(0);
+};
+
+export const updateSearchParams = (type: string, value: string): string => {
+  const searchParams = new URLSearchParams(window.location.search);
+  searchParams.set(type, value);
+
+  const newPathName = `${window.location.pathname}?${searchParams.toString()}`;
+
+  return newPathName;
 };

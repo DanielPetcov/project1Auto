@@ -47,9 +47,15 @@ export interface FetchCarsProps {
   model?: string | string[];
   year?: string | string[];
   limit?: string | string[];
+  fuel_type?: string | string[];
 }
 
 export interface FetchCarsReturnType {
   data: CarProps[];
   message?: string;
+}
+
+export interface ShowMoreProps {
+  pageNumber: number;
+  isNext: boolean;
 }
